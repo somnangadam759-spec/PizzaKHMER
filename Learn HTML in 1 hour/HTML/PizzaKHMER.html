@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Paradise | Hot, Fresh, Delicious</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo"><i class="fas fa-pizza-slice"></i> Pizza Paradise</a>
+            <nav class="nav-links">
+                <a href="#home" class="active">Home</a>
+                <a href="#menu">Menu</a>
+                <a href="#about">About</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contact">Contact</a>
+            </nav>
+            <div class="nav-actions">
+                <button id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+                <div class="cart-icon" id="cart-btn">
+                    <i class="fas fa-shopping-basket"></i>
+                    <span id="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <span class="badge">Fresh Pizza Every Day</span>
+            <h1>Hot, Fresh, Delicious.</h1>
+            <p>Order your favorite pizza in minutes and enjoy lightning-fast delivery straight to your doorstep.</p>
+            <div class="hero-btns">
+                <a href="#menu" class="btn btn-primary">Order Now</a>
+                <a href="#about" class="btn btn-secondary">View Menu</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Delicious Pizza">
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="section-title">
+            <h2>Why Choose Us?</h2>
+            <p>The purest ingredients for the ultimate flavor profile</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-leaf"></i>
+                <h3>100% Organic</h3>
+                <p>Fresh vegetables and premium local ingredients daily.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-shipping-fast"></i>
+                <h3>Fast Delivery</h3>
+                <p>Hot pizza delivered to your doorstep within 30 minutes.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-award"></i>
+                <h3>Chef Special</h3>
+                <p>Curated signature recipes engineered by culinary experts.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <div class="section-title">
+            <h2>Our Heaven Menu</h2>
+            <p>Browse categories and customize your ideal slice</p>
+        </div>
+
+        <div class="menu-controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Search your favorite pizza...">
+            </div>
+            <div class="filter-tabs">
+                <button class="tab-btn active" data-filter="all">All</button>
+                <button class="tab-btn" data-filter="classic">Classic</button>
+                <button class="tab-btn" data-filter="premium">Premium</button>
+                <button class="tab-btn" data-filter="vegetarian">Vegetarian</button>
+                <button class="tab-btn" data-filter="seafood">Seafood</button>
+                <button class="tab-btn" data-filter="spicy">Spicy</button>
+                <button class="tab-btn" data-filter="drinks">Drinks</button>
+                <button class="tab-btn" data-filter="desserts">Desserts</button>
+            </div>
+        </div>
+
+        <div class="menu-grid" id="menu-container">
+        </div>
+    </section>
+
+    <div class="modal" id="custom-modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-custom">&times;</span>
+            <h2 id="modal-item-title">Customize Item</h2>
+            <div class="custom-group">
+                <h3>Select Size</h3>
+                <label><input type="radio" name="pizza-size" value="small" data-price="0"> Small (Standard)</label>
+                <label><input type="radio" name="pizza-size" value="medium" data-price="3" checked> Medium (+$3.00)</label>
+                <label><input type="radio" name="pizza-size" value="large" data-price="5"> Large (+$5.00)</label>
+                <label><input type="radio" name="pizza-size" value="family" data-price="8"> Family (+$8.00)</label>
+            </div>
+            <div class="custom-group">
+                <h3>Extra Toppings (+$1.50 each)</h3>
+                <div class="toppings-grid">
+                    <label><input type="checkbox" value="Cheese"> Extra Cheese</label>
+                    <label><input type="checkbox" value="Bacon"> Bacon</label>
+                    <label><input type="checkbox" value="Mushroom"> Mushroom</label>
+                    <label><input type="checkbox" value="Onion"> Onion</label>
+                    <label><input type="checkbox" value="Jalapeño"> Jalapeño</label>
+                </div>
+            </div>
+            <button id="confirm-add-btn" class="btn btn-primary w-100">Add to Cart</button>
+        </div>
+    </div>
+
+    <div class="modal" id="cart-modal">
+        <div class="modal-content side-drawer">
+            <span class="close-modal" id="close-cart">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cart-items-container">
+            </div>
+            <div class="cart-summary">
+                <div class="coupon-box">
+                    <input type="text" id="coupon-input" placeholder="Enter Coupon (e.g. PIZZA10)">
+                    <button id="apply-coupon" class="btn btn-secondary">Apply</button>
+                </div>
+                <hr>
+                <div class="summary-line"><span>Subtotal:</span> <span id="subtotal-val">$0.00</span></div>
+                <div class="summary-line"><span>Discount:</span> <span id="discount-val">-$0.00</span></div>
+                <div class="summary-line total"><span>Total:</span> <span id="total-val">$0.00</span></div>
+                <button id="checkout-btn" class="btn btn-primary w-100" style="margin-top: 1rem;">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <section id="about" class="about-section">
+        <div class="about-container">
+            <div class="about-img">
+                <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80" alt="Our Kitchen">
+            </div>
+            <div class="about-text">
+                <h2>About Pizza Paradise</h2>
+                <p>Founded in Phnom Penh, Cambodia, Pizza Paradise marries traditional Italian culinary secrets with high-grade modern execution. Every crust is hand-stretched, cold-fermented for 48 hours, and baked to blistered perfection.</p>
+                <div class="stats">
+                    <div>
+                        <h3>15+</h3>
+                        <p>Pizza Varieties</p>
+                    </div>
+                    <div>
+                        <h3>30m</h3>
+                        <p>Guaranteed Delivery</p>
+                    </div>
+                    <div>
+                        <h3>5★</h3>
+                        <p>Customer Rated</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews-section">
+        <div class="section-title">
+            <h2>Customer Reviews</h2>
+        </div>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Best pizza I've ever eaten in Phnom Penh! The crust is beautifully airy."</p>
+                <h4>- John</h4>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"Fast delivery and packaging kept it steaming hot. Highly recommended!"</p>
+                <h4>- Sophia</h4>
+            </div>
+            <div class="review-card">
+                <div class="stars">★★★★★</div>
+                <p>"The Truffle Pizza is an absolute masterpiece. Will order again!"</p>
+                <h4>- David</h4>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="info-item"><i class="fas fa-phone"></i>
+                    <p>+855 12 345 678</p>
+                </div>
+                <div class="info-item"><i class="fas fa-envelope"></i>
+                    <p>info@pizzaparadise.com</p>
+                </div>
+                <div class="info-item"><i class="fas fa-map-marker-alt"></i>
+                    <p>Phnom Penh, Cambodia</p>
+                </div>
+
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.770661216393!2d104.89001331533159!3d11.568291047530635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3109513dc76a6be3%3A0x9c0ece053156980!2sPhnom%20Penh%2C%20Cambodia!5e0!3m2!1sen!2s!4v1650000000000!5m2!1sen!2s"
+                        width="100%" height="200" style="border:0; border-radius:8px;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Pizza Paradise. All Rights Reserved.</p>
+            <div class="socials">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza KHMER</title>
+
+    <link rel="stylesheet" href="PizzaKHMER.css">
+</head>
+
+<body>
+
+    <h1>Welcome to Pizza KHMER!</h1>
+
+    <script src="PizzaKHMER.js"></script>
+</body>
+
+</html>
